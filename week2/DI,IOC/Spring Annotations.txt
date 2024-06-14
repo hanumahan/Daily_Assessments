@@ -1,0 +1,91 @@
+Annotations provide a more concise and often clearer way to configure Spring beans and manage dependencies compared to XML configuration.
+
+Usage of Annotations:
+
+1. @Component:
+
+Purpose: Declares a class as a Spring bean.
+
+Example:
+
+@Component
+public class UserService {
+    // Class implementation
+}
+
+
+2. @Autowired:
+
+Purpose: Automatically injects dependencies into the bean.
+
+Example:
+
+@Component
+public class UserController {
+    @Autowired
+    private UserService userService;
+
+    // Other methods
+}
+
+
+3.@Qualifier:
+
+Purpose: Specifies which bean to autowire when multiple beans of the same type are present.
+
+Example:
+
+@Component
+public class UserController {
+    @Autowired
+    @Qualifier("userService")
+    private UserService userService;
+
+    // Other methods
+}
+
+4.@Scope:
+
+Purpose: Specifies the scope of the bean.
+
+Example:
+
+@Component
+@Scope("prototype")
+public class UserService {
+    // Class implementation
+}
+
+
+Example Without XML Configuration:
+
+
+@Component
+@Scope("prototype")
+public class UserService {
+    // Class implementation
+}
+
+@Component
+public class UserController {
+    @Autowired
+    private UserService userService;
+
+    // Other methods
+}
+
+In this example:
+
+@Component marks UserService as a Spring bean.
+@Autowired injects UserService into UserController.
+@Scope("prototype") specifies that UserService should be of prototype scope.
+
+Summary
+Bean Scopes: Singleton, prototype, request, session, and global session are common scopes in Spring, each serving different purposes in managing bean instances.
+Annotations: @Component marks a class as a Spring bean, @Autowired injects dependencies, @Qualifier resolves ambiguities in autowiring, and @Scope specifies the bean's scope, all providing concise configuration options compared to XML.
+Using annotations reduces the verbosity of XML configuration and provides more flexibility and readability in managing Spring components and their dependencies.
+
+
+
+
+

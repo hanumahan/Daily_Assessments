@@ -1,0 +1,52 @@
+Hibernate Query Language (HQL) is an object-oriented query language similar to SQL but operates on persistent objects and their properties rather than directly on database tables. HQL queries are translated by Hibernate into SQL queries suitable for the underlying database.
+
+Basic HQL Queries:
+
+1.SELECT Query:
+
+
+// Example of selecting all users
+String hql = "FROM User";
+Query query = session.createQuery(hql);
+List<User> users = query.list();
+
+
+2.UPDATE Query:
+
+
+
+String hql = "UPDATE User SET password = :newPassword WHERE id = :userId";
+Query query = session.createQuery(hql);
+query.setParameter("newPassword", "newPassword123");
+query.setParameter("userId", 1L);
+int rowCount = query.executeUpdate();
+
+3.DELETE Query:
+
+
+String hql = "DELETE FROM User WHERE id = :userId";
+Query query = session.createQuery(hql);
+query.setParameter("userId", 1L);
+int rowCount = query.executeUpdate();
+
+Parameterized HQL Queries:
+
+HQL supports parameterized queries using named parameters (setParameter() method):
+
+
+String username = "hanuma";
+String hql = "FROM User WHERE username = :username";
+Query query = session.createQuery(hql);
+query.setParameter("username", username);
+List<User> users = query.list();
+Executing HQL Queries:
+
+To execute HQL queries, you typically follow these steps:
+
+Obtain a Hibernate Session from the SessionFactory.
+Create an HQL query string.
+Create a Query object from the session using createQuery(hql).
+Optionally, set parameters using setParameter(name, value).
+Execute the query using query.list() for SELECT queries or query.executeUpdate() for UPDATE and DELETE queries.
+
+

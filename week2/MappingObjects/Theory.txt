@@ -1,0 +1,32 @@
+Entity mapping in Hibernate refers to the process of mapping Java classes (entities) to corresponding database tables. This mapping allows Hibernate to manage the persistence of Java objects to the relational database and vice versa. Hibernate provides several annotations to facilitate this mapping, making it straightforward to define how each field and relationship in a Java class corresponds to database columns and relationships.
+
+Concept of Entity Mapping in Hibernate
+1. Basics of Entity Mapping:
+
+@Entity: Marks a Java class as an entity that Hibernate will manage.
+@Table: Specifies the database table name and optional details such as schema.
+Example: Mapping a Java class (User) to a database table (users):
+
+
+@Entity: Marks the User class as an entity. Hibernate will manage instances of this class and map them to the users table.
+@Table: Specifies that instances of User should be mapped to the users table in the database.
+
+2. Mapping Fields with @Id and @Column:
+
+@Id: Marks the primary key field of the entity.
+@Column: Maps a field to a specific column in the database table.
+In the User class example:
+
+@Id: Marks the id field as the primary key.
+@Column: Maps username and password fields to corresponding columns in the users table.
+3. Associations (@ManyToOne, @OneToMany):
+
+Hibernate supports mapping associations between entities using various annotations:
+
+@ManyToOne: Defines a many-to-one relationship between entities.
+@OneToMany: Defines a one-to-many relationship between entities.
+
+
+
+@ManyToOne: In the Post class, @ManyToOne defines a many-to-one relationship with User. The @JoinColumn annotation specifies the foreign key column (user_id) in the posts table.
+@OneToMany: In the User class, @OneToMany defines a one-to-many relationship with Post. The mappedBy attribute specifies the field (user) in the Post class that owns the relationship. cascade = CascadeType.ALL ensures that operations on User cascade to associated Post entities.

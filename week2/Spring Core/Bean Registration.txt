@@ -1,0 +1,36 @@
+In Spring framework, beans are typically registered and configured using XML configuration files (applicationContext.xml).
+
+application.xml:
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Define a bean named "userService" -->
+    <bean id="userService" class="com.example.UserService">
+        <!-- You can configure properties or constructor arguments here -->
+    </bean>
+
+</beans>
+Retrieving the bean using ApplicationContext:
+
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class MainApp {
+    public static void main(String[] args) {
+        // Load the Spring XML configuration file
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+
+        // Retrieve the bean from the Spring container
+        UserService userService = (UserService) context.getBean("userService");
+
+        // Use the userService object
+        userService.someMethod();
+    }
+}
+The <bean> element defines a bean named userService of type com.example.UserService.
+The ApplicationContext loads the configuration from applicationContext.xml.
+context.getBean("userService") retrieves the bean instance by its id (userService), which can then be used in the application.

@@ -1,0 +1,43 @@
+The lifecycle of a Spring bean consists of several stages:
+
+Instantiation: The container instantiates the bean using a constructor or a factory method.
+
+Populate Properties: Dependencies and properties are set on the bean.
+
+BeanNameAware and BeanFactoryAware (if applicable): Implementing BeanNameAware and BeanFactoryAware interfaces allows the bean to get aware of its name and the factory it was created by.
+
+BeanPostProcessor Before Initialization: Before initialization callbacks are called (e.g., postProcessBeforeInitialization in BeanPostProcessor).
+
+Initialization: The bean is initialized, where initialization callbacks can be used (e.g., @PostConstruct annotated methods or init-method defined in XML).
+
+BeanPostProcessor After Initialization: After initialization callbacks are called (e.g., postProcessAfterInitialization in BeanPostProcessor).
+
+Bean is ready for use: The bean is now ready to be used by the application.
+
+Destruction: If configured, the container can destroy the bean when it is no longer needed, calling destruction callbacks (@PreDestroy annotated methods or destroy-method defined in XML).
+
+Customizing Initialization and Destruction:
+
+XML Configuration for Custom Initialization and Destruction:
+
+
+<!-- applicationContext.xml -->
+<bean id="userService" class="com.example.UserService"
+      init-method="init" destroy-method="cleanup">
+    <!-- other configurations -->
+</bean>
+
+java:
+
+public class UserService {
+    public void init() {
+        // Custom initialization code
+    }
+
+    public void cleanup() {
+        // Custom destruction/cleanup code
+    }
+}
+In this example:
+
+The init-method and destroy-method attributes of the <bean> element specify custom initialization and destruction methods (init() and cleanup() in UserService).

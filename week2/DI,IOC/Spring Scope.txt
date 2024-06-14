@@ -1,0 +1,47 @@
+In Spring framework, bean scopes define the lifecycle and visibility of beans managed by the Spring container. Different scopes serve different purposes depending on how and where the beans are used within your application.
+
+Commonly Supported Bean Scopes:
+
+1.Singleton (default):
+
+Definition: Only one instance of the bean is created for the entire application context.
+
+Example Scenario: Use singleton scope for stateless beans or beans that are shared across the application, such as DAO classes, service classes, etc.
+XML Configuration:
+
+<bean id="userService" class="com.example.UserService" scope="singleton"/>
+
+2.Prototype:
+
+Definition: A new instance of the bean is created each time it is requested (i.e., not shared).
+Example Scenario: Use prototype scope for beans that maintain state or have dependencies that should not be shared, such as session-specific or request-specific beans.
+XML Configuration:
+
+<bean id="userService" class="com.example.UserService" scope="prototype"/>
+
+3.Request:
+
+Definition: A new instance of the bean is created for each HTTP request.
+Example Scenario: Use request scope for beans that need to be tied to a specific HTTP request, such as form backing beans in web applications.
+XML Configuration (for web-aware Spring applications):
+
+<bean id="userService" class="com.example.UserService" scope="request"/>
+
+
+4.Session:
+
+Definition: A new instance of the bean is created for each HTTP session.
+Example Scenario: Use session scope for beans that need to be tied to a specific user session, such as user-specific shopping carts or user preferences.
+XML Configuration (for web-aware Spring applications):
+
+<bean id="userService" class="com.example.UserService" scope="session"/>
+
+
+5.Global Session:
+
+Definition: Similar to session scope but used in a Portlet-based web application.
+Example Scenario: Use global session scope for beans that need to be shared across all Portlet requests for a specific user.
+XML Configuration (for Portlet-based Spring applications):
+xml
+Copy code
+<bean id="userService" class="com.example.UserService" scope="globalSession"/>

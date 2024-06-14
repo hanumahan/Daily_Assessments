@@ -1,0 +1,28 @@
+Dependency Injection is a design pattern used in Spring to achieve loose coupling between components by injecting dependencies (like objects, services, configurations) into a bean at runtime rather than the bean itself creating them. This allows for easier testing, reusability, and maintenance.
+
+Types of Dependency Injection in Spring:
+
+Constructor-based DI: Dependencies are provided to the bean via constructor arguments.
+Setter-based DI: Dependencies are provided via setter methods of the bean.
+
+Performing Constructor-based DI using XML Configuration:
+
+
+<!-- applicationContext.xml -->
+<bean id="userService" class="com.example.UserService">
+    <!-- Constructor-based DI -->
+    <constructor-arg ref="userDao"/> <!-- Assuming userDao bean is defined elsewhere -->
+</bean>
+
+<bean id="userDao" class="com.example.UserDao"/>
+
+
+Performing Setter-based DI using XML Configuration:
+
+<!-- applicationContext.xml -->
+<bean id="userService" class="com.example.UserService">
+    <!-- Setter-based DI -->
+    <property name="userDao" ref="userDao"/> <!-- Assuming userDao bean is defined elsewhere -->
+</bean>
+
+<bean id="userDao" class="com.example.UserDao"/>

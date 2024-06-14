@@ -1,0 +1,97 @@
+Spring Framework provides various modes of autowiring to inject dependencies automatically. The primary modes are byType, byName, constructor, autodetect, and no. Each mode has its use cases and benefits.
+
+1. byType
+Description:
+
+Autowires by the type of the property.
+Example:
+
+xml
+<bean id="exampleService" class="com.example.ExampleService" autowire="byType"/>
+<bean id="exampleRepository" class="com.example.ExampleRepository"/>
+
+When to Use:
+When you have a single bean of a specific type and want Spring to match the type and inject it.
+
+2. byName
+Description:
+Autowires by matching the name of the property with the bean name.
+
+Example:
+
+xml:
+
+<bean id="exampleService" class="com.example.ExampleService" autowire="byName"/>
+<bean id="exampleRepository" class="com.example.ExampleRepository"/>
+
+
+java:
+
+public class ExampleService {
+    private ExampleRepository exampleRepository;
+
+    // Setter method
+    public void setExampleRepository(ExampleRepository exampleRepository) {
+        this.exampleRepository = exampleRepository;
+    }
+}
+When to Use:
+
+When you want to inject dependencies based on matching bean names with property names.
+
+
+3. constructor
+Description:
+
+Autowires by the constructor, matching arguments by type.
+Example:
+
+xml
+
+<bean id="exampleService" class="com.example.ExampleService" autowire="constructor"/>
+<bean id="exampleRepository" class="com.example.ExampleRepository"/>
+
+
+java:
+
+public class ExampleService {
+    private ExampleRepository exampleRepository;
+
+    // Constructor
+    public ExampleService(ExampleRepository exampleRepository) {
+        this.exampleRepository = exampleRepository;
+    }
+}
+
+When to Use:
+When you prefer constructor injection, which ensures dependencies are provided at object creation time.
+
+4. autodetect
+Description:
+
+Deprecated. Tries constructor injection first; if not successful, falls back to byType.
+Example:
+
+xml
+
+<bean id="exampleService" class="com.example.ExampleService" autowire="autodetect"/>
+<bean id="exampleRepository" class="com.example.ExampleRepository"/>
+
+When to Use:
+Was used for flexibility, but now it's better to explicitly choose between constructor and byType.
+
+5. no
+
+Description:
+No autowiring; dependencies must be defined explicitly.
+
+Example:
+
+
+<bean id="exampleService" class="com.example.ExampleService">
+    <property name="exampleRepository" ref="exampleRepository"/>
+</bean>
+<bean id="exampleRepository" class="com.example.ExampleRepository"/>
+
+When to Use:
+When you want to manage dependency injection manually.
